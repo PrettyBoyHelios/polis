@@ -274,11 +274,11 @@ public:
         consensus.nMasternodePaymentsIncreasePeriod = 1569325056;
         consensus.nInstantSendConfirmationsRequired = 2;
         consensus.nInstantSendKeepLock = 6;
-        consensus.nBudgetPaymentsStartBlock = 4100;
+        consensus.nBudgetPaymentsStartBlock = 410;
         consensus.nBudgetPaymentsCycleBlocks = 50;
         consensus.nBudgetPaymentsWindowBlocks = 10;
-        consensus.nSuperblockStartBlock = 4200; // NOTE: Should satisfy nSuperblockStartBlock > nBudgetPeymentsStartBlock
-        consensus.nSuperblockStartHash = uint256S("000001af046f4ed575a48b919ed28be8a40c6a78df8d7830fbbfd07ec17a1fee");
+        consensus.nSuperblockStartBlock = 420; // NOTE: Should satisfy nSuperblockStartBlock > nBudgetPeymentsStartBlock
+        consensus.nSuperblockStartHash = uint256S("000001f33fbcab10261297ac2a53843845e76a7b572037d84b0f155538bafb57");
         consensus.nSuperblockCycle = 24; // Superblocks can be issued hourly on testnet
         consensus.nGovernanceMinQuorum = 1;
         consensus.nGovernanceFilterElements = 500;
@@ -321,25 +321,25 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_BIP147].nThreshold = 50; // 50% of 100
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x"); // 37900
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000049804908"); // 836
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x"); // 37900
+        consensus.defaultAssumeValid = uint256S("0x0000001c56189dd77f84ce961b692db67e687447acccd79b408bc09ca01e8350"); // 836
 
         pchMessageStart[0] = 0xce;
         pchMessageStart[1] = 0xe2;
         pchMessageStart[2] = 0xca;
         pchMessageStart[3] = 0xff;
         vAlertPubKey = ParseHex("04517d8a699cb43d3938d7b24faaff7cda448ca4ea267723ba614784de661949bf632d6304316b244646dea079735b9a6fc4af804efb4752075b9fe2245e14e412");
-        nDefaultPort = 21430;
+        nDefaultPort = 24130;
+        nMaxTipAge = 0x7fffffff; // allow mining on top of old blocks for testnet
         nDelayGetHeadersTime = 24 * 60 * 60;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1518833511, 113300, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1530105753, 1137026, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x0000009038aeaea86784e959b0b4002793adad39fc9d6f8789ed2edf99ad5c8b"));
+        assert(consensus.hashGenesisBlock == uint256S("0x0000097c608165d389ccaf6b5a9534721b8c672b48ff1b966d9dd6d9413ab36b"));
         assert(genesis.hashMerkleRoot == uint256S("0x5dc9bcf5d1e4802dad0045a88849e3ad97d07a5b8aaee1114ed5ae03b98c4bfc"));
-
 
 
         vFixedSeeds.clear();
@@ -347,11 +347,11 @@ public:
 
 
         // Testnet polis addresses start with 'y'
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,140);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,65);
         // Testnet polis script addresses start with '8' or '9'
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,19);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,87);
         // Testnet private keys start with '9' or 'c' (Bitcoin defaults)
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,122);
         // Testnet polis BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x35)(0x87)(0xCF).convert_to_container<std::vector<unsigned char> >();
         // Testnet polis BIP32 prvkeys start with 'tprv' (Bitcoin defaults)
@@ -373,19 +373,23 @@ public:
         nFulfilledRequestExpireTime = 5*60; // fulfilled requests expire in 5 minutes
 
 
-        strSporkAddress = "ycMRXhDJC9iNxrMK5ywM8PpyEH2A4o28e7";
+        strSporkAddress = "TYGhhymCmZL2UiKNUvRTHDHCWpcnArBrSq";
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            (   0, uint256S("0x"))
-
+            (   0, uint256S("0x0000097c608165d389ccaf6b5a9534721b8c672b48ff1b966d9dd6d9413ab36b"))
+            (   100, uint256S("0x00000ffe7f8d6716e687bd917e8720c41f23727d9ea5a99e2fc0e22a386bd24a"))
+            (   200, uint256S("0x00000e10cfc0eb02a4de84b1ccb2517fa6d959619d85b9e95171fed31e7d741a"))
+            (   300, uint256S("0x00000f1e5e8abc23d7da7d1e0d01ebd636b557e6a2f70c70d00ba60353995d2b"))
+            (   400, uint256S("0x00000a2cfbe7319709b8252d2eccc54ef90e72b257cada6103c634e0dd7fd7ca"))
+            (   800, uint256S("0x0000000a47ffb1a7b01281318604546b9770d0c7d91971ef80ee8514656c32a9"))
 
         };
         chainTxData = ChainTxData{
-            0, // * UNIX timestamp of last checkpoint block
-            0,       // * total number of transactions between genesis and last checkpoint
+            1530124519, // * UNIX timestamp of last checkpoint block
+            804,       // * total number of transactions between genesis and last checkpoint
                         //   (the tx=... number in the SetBestChain debug.log lines)
-            0         // * estimated number of transactions per day after checkpoint
+            21000         // * estimated number of transactions per day after checkpoint
 
         };
 
