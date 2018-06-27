@@ -45,7 +45,7 @@ class CBaseTestNetParams : public CBaseChainParams
 public:
     CBaseTestNetParams()
     {
-        nRPCPort = 21431;
+        nRPCPort = 24131;
         strDataDir = "testnet3";
     }
 };
