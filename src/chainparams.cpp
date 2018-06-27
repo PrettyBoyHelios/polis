@@ -157,7 +157,7 @@ public:
 
         // polis BIP44 coin type is '5'
         nExtCoinType = 5;
-     
+
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
 
         fMiningRequiresPeers = true;
@@ -174,7 +174,7 @@ public:
             boost::assign::map_list_of
             ( 0, uint256S("0x000009701eb781a8113b1af1d814e2f060f6408a2c990db291bc5108a1345c1e"))
             ( 10, uint256S("0x000006f686844f1873f4fcf77516eaa0a11f5762b797314c5875438c97fe4562"))
-            ( 50, uint256S("0x00000547ca650f3be6ddf31871dfd5f76faafcd12b6083706e3d0a88c9a0cdbe"))  
+            ( 50, uint256S("0x00000547ca650f3be6ddf31871dfd5f76faafcd12b6083706e3d0a88c9a0cdbe"))
             ( 100, uint256S("0x000001c12d74ca8120d2751bb2846a5af44892045099750efe73a0cbb1eca860"))
             ( 200, uint256S("0x000000053db45327e7fcce9b8baf9060622c01456ac677121a6f8dcf15a98d7b"))
             ( 300, uint256S("0x00000000027d5a77e5c38e366465be2f21292fa3eb4d290efb6316eebcc5c0ca"))
@@ -209,11 +209,11 @@ public:
         consensus.nMasternodePaymentsIncreaseBlock = 1569325056;
         consensus.nMasternodePaymentsIncreasePeriod = 1569325056;
         consensus.nInstantSendKeepLock = 6;
-        consensus.nBudgetPaymentsStartBlock = 4100;
+        consensus.nBudgetPaymentsStartBlock = 410;
         consensus.nBudgetPaymentsCycleBlocks = 50;
         consensus.nBudgetPaymentsWindowBlocks = 10;
         consensus.nBudgetProposalEstablishingTime = 60*20;
-        consensus.nSuperblockStartBlock = 4200; // NOTE: Should satisfy nSuperblockStartBlock > nBudgetPeymentsStartBlock
+        consensus.nSuperblockStartBlock = 420; // NOTE: Should satisfy nSuperblockStartBlock > nBudgetPeymentsStartBlock
         consensus.nSuperblockCycle = 24; // Superblocks can be issued hourly on testnet
         consensus.nGovernanceMinQuorum = 1;
         consensus.nGovernanceFilterElements = 500;
@@ -225,7 +225,7 @@ public:
         consensus.BIP34Hash = uint256S("0x0000047d24635e347be3aaaeb66c26be94901a2f962feccd4f95090191f208c1");
         consensus.powLimit = uint256S("00000fffff000000000000000000000000000000000000000000000000000000");
         consensus.nPowTargetTimespan = 60 * 60 * 24; // polis: 1 day
-        consensus.nPowTargetSpacing = 40; // polis: 2.5 minutes
+        consensus.nPowTargetSpacing = 120; // polis: 2.5 minutes
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
         consensus.nPowKGWHeight = 4001; // nPowKGWHeight >= nPowDGWHeight means "no KGW"
@@ -263,24 +263,24 @@ public:
         nMaxTipAge = 0x7fffffff; // allow mining on top of old blocks for testnet
         nDelayGetHeadersTime = 24 * 60 * 60;
         nPruneAfterHeight = 1000;
-      
-        genesis = CreateGenesisBlock(1518833511, 113300, 0x1e0ffff0, 1, 50 * COIN);
+
+        genesis = CreateGenesisBlock(1530105753, 1137026, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x0000009038aeaea86784e959b0b4002793adad39fc9d6f8789ed2edf99ad5c8b"));
+        assert(consensus.hashGenesisBlock == uint256S("0x0000097c608165d389ccaf6b5a9534721b8c672b48ff1b966d9dd6d9413ab36b"));
         assert(genesis.hashMerkleRoot == uint256S("0x5dc9bcf5d1e4802dad0045a88849e3ad97d07a5b8aaee1114ed5ae03b98c4bfc"));
 
 
-       
+
         vFixedSeeds.clear();
         vSeeds.clear();
 
 
         // Testnet polis addresses start with 'y'
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,140);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,65);
         // Testnet polis script addresses start with '8' or '9'
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,19);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,87);
         // Testnet private keys start with '9' or 'c' (Bitcoin defaults)
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,122);
         // Testnet polis BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x35)(0x87)(0xCF).convert_to_container<std::vector<unsigned char> >();
         // Testnet polis BIP32 prvkeys start with 'tprv' (Bitcoin defaults)
@@ -372,12 +372,12 @@ public:
         pchMessageStart[3] = 0xdc;
         nMaxTipAge = 6 * 60 * 60; // ~144 blocks behind -> 2 x fork detection time, was 24 * 60 * 60 in bitcoin
         nDelayGetHeadersTime = 0; // never delay GETHEADERS in regtests
-        nDefaultPort = 19994;
+        nDefaultPort = 24150;
         nPruneAfterHeight = 1000;
 
-      genesis = CreateGenesisBlock(1513831322, 887612, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1530105753, 1137026, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x00000f3b4ec57f851b3706c056eda3120875896c9970495ae2efd49b46472a05"));
+        assert(consensus.hashGenesisBlock == uint256S("0x0000097c608165d389ccaf6b5a9534721b8c672b48ff1b966d9dd6d9413ab36b"));
         assert(genesis.hashMerkleRoot == uint256S("0x5dc9bcf5d1e4802dad0045a88849e3ad97d07a5b8aaee1114ed5ae03b98c4bfc"));
 
 
