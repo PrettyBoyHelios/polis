@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2017 The Polis Core developers
+// Copyright (c) 2014-2017 The polis Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -513,7 +513,7 @@ UniValue masternodelist(const JSONRPCRequest& request)
                 "  lastpaidblock  - Print the last block height a node was paid on the network\n"
                 "  lastpaidtime   - Print the last time a node was paid on the network\n"
                 "  lastseen       - Print timestamp of when a masternode was last seen on the network\n"
-                "  payee          - Print Polis address associated with a masternode (can be additionally filtered,\n"
+                "  payee          - Print polis address associated with a masternode (can be additionally filtered,\n"
                 "                   partial match)\n"
                 "  protocol       - Print protocol of a masternode (can be additionally filtered, exact match)\n"
                 "  pubkey         - Print the masternode (not collateral) public key\n"
@@ -533,16 +533,14 @@ UniValue masternodelist(const JSONRPCRequest& request)
         mnodeman.UpdateLastPaid(pindex);
     }
 
-    UniValue obj(UniValue::VARR);
+    UniValue obj(UniValue::VOBJ);
     if (strMode == "rank") {
         CMasternodeMan::rank_pair_vec_t vMasternodeRanks;
         mnodeman.GetMasternodeRanks(vMasternodeRanks);
         for (const auto& rankpair : vMasternodeRanks) {
-            UniValue objMN(UniValue::VOBJ);
             std::string strOutpoint = rankpair.second.outpoint.ToStringShort();
             if (strFilter !="" && strOutpoint.find(strFilter) == std::string::npos) continue;
-            objMN.push_back(Pair(strOutpoint, rankpair.first));
-            obj.push_back(objMN);
+            obj.push_back(Pair(strOutpoint, rankpair.first));
         }
     } else {
         std::map<COutPoint, CMasternode> mapMasternodes = mnodeman.GetFullMasternodeMap();
@@ -550,33 +548,24 @@ UniValue masternodelist(const JSONRPCRequest& request)
             CMasternode mn = mnpair.second;
             std::string strOutpoint = mnpair.first.ToStringShort();
             if (strMode == "activeseconds") {
-              UniValue objMN(UniValue::VOBJ);
                 if (strFilter !="" && strOutpoint.find(strFilter) == std::string::npos) continue;
-                objMN.push_back(Pair(strOutpoint, (int64_t)(mn.lastPing.sigTime - mn.sigTime)));
-                obj.push_back(objMN);
+                obj.push_back(Pair(strOutpoint, (int64_t)(mn.lastPing.sigTime - mn.sigTime)));
             } else if (strMode == "addr") {
-              UniValue objMN(UniValue::VOBJ);
                 std::string strAddress = mn.addr.ToString();
                 if (strFilter !="" && strAddress.find(strFilter) == std::string::npos &&
                     strOutpoint.find(strFilter) == std::string::npos) continue;
-                objMN.push_back(Pair(strOutpoint, strAddress));
-                obj.push_back(objMN);
+                obj.push_back(Pair(strOutpoint, strAddress));
             } else if (strMode == "daemon") {
-              UniValue objMN(UniValue::VOBJ);
                 std::string strDaemon = mn.lastPing.nDaemonVersion > DEFAULT_DAEMON_VERSION ? FormatVersion(mn.lastPing.nDaemonVersion) : "Unknown";
                 if (strFilter !="" && strDaemon.find(strFilter) == std::string::npos &&
                     strOutpoint.find(strFilter) == std::string::npos) continue;
-                objMN.push_back(Pair(strOutpoint, strDaemon));
-                obj.push_back(objMN);
+                obj.push_back(Pair(strOutpoint, strDaemon));
             } else if (strMode == "sentinel") {
-              UniValue objMN(UniValue::VOBJ);
                 std::string strSentinel = mn.lastPing.nSentinelVersion > DEFAULT_SENTINEL_VERSION ? SafeIntVersionToString(mn.lastPing.nSentinelVersion) : "Unknown";
                 if (strFilter !="" && strSentinel.find(strFilter) == std::string::npos &&
                     strOutpoint.find(strFilter) == std::string::npos) continue;
-                objMN.push_back(Pair(strOutpoint, strSentinel));
-                obj.push_back(objMN);
+                obj.push_back(Pair(strOutpoint, strSentinel));
             } else if (strMode == "full") {
-              UniValue objMN(UniValue::VOBJ);
                 std::ostringstream streamFull;
                 streamFull << std::setw(18) <<
                                mn.GetStatus() << " " <<
@@ -590,10 +579,8 @@ UniValue masternodelist(const JSONRPCRequest& request)
                 std::string strFull = streamFull.str();
                 if (strFilter !="" && strFull.find(strFilter) == std::string::npos &&
                     strOutpoint.find(strFilter) == std::string::npos) continue;
-                objMN.push_back(Pair(strOutpoint, strFull));
-                obj.push_back(objMN);
+                obj.push_back(Pair(strOutpoint, strFull));
             } else if (strMode == "info") {
-              UniValue objMN(UniValue::VOBJ);
                 std::ostringstream streamInfo;
                 streamInfo << std::setw(18) <<
                                mn.GetStatus() << " " <<
@@ -607,10 +594,8 @@ UniValue masternodelist(const JSONRPCRequest& request)
                 std::string strInfo = streamInfo.str();
                 if (strFilter !="" && strInfo.find(strFilter) == std::string::npos &&
                     strOutpoint.find(strFilter) == std::string::npos) continue;
-                objMN.push_back(Pair(strOutpoint, strInfo));
-                obj.push_back(objMN);
+                obj.push_back(Pair(strOutpoint, strInfo));
             } else if (strMode == "json") {
-              UniValue objMN(UniValue::VOBJ);
                 std::ostringstream streamInfo;
                 streamInfo <<  mn.addr.ToString() << " " <<
                                CBitcoinAddress(mn.pubKeyCollateralAddress.GetID()).ToString() << " " <<
@@ -626,7 +611,7 @@ UniValue masternodelist(const JSONRPCRequest& request)
                 std::string strInfo = streamInfo.str();
                 if (strFilter !="" && strInfo.find(strFilter) == std::string::npos &&
                     strOutpoint.find(strFilter) == std::string::npos) continue;
-                objMN.push_back(Pair("txid", strOutpoint));
+                UniValue objMN(UniValue::VOBJ);
                 objMN.push_back(Pair("address", mn.addr.ToString()));
                 objMN.push_back(Pair("payee", CBitcoinAddress(mn.pubKeyCollateralAddress.GetID()).ToString()));
                 objMN.push_back(Pair("status", mn.GetStatus()));
@@ -638,48 +623,34 @@ UniValue masternodelist(const JSONRPCRequest& request)
                 objMN.push_back(Pair("activeseconds", (int64_t)(mn.lastPing.sigTime - mn.sigTime)));
                 objMN.push_back(Pair("lastpaidtime", mn.GetLastPaidTime()));
                 objMN.push_back(Pair("lastpaidblock", mn.GetLastPaidBlock()));
-                obj.push_back(objMN);
+                obj.push_back(Pair(strOutpoint, objMN));
             } else if (strMode == "lastpaidblock") {
-              UniValue objMN(UniValue::VOBJ);
                 if (strFilter !="" && strOutpoint.find(strFilter) == std::string::npos) continue;
-                objMN.push_back(Pair(strOutpoint, mn.GetLastPaidBlock()));
-                obj.push_back(objMN);
+                obj.push_back(Pair(strOutpoint, mn.GetLastPaidBlock()));
             } else if (strMode == "lastpaidtime") {
-              UniValue objMN(UniValue::VOBJ);
                 if (strFilter !="" && strOutpoint.find(strFilter) == std::string::npos) continue;
-                objMN.push_back(Pair(strOutpoint, mn.GetLastPaidTime()));
-                obj.push_back(objMN);
+                obj.push_back(Pair(strOutpoint, mn.GetLastPaidTime()));
             } else if (strMode == "lastseen") {
-              UniValue objMN(UniValue::VOBJ);
                 if (strFilter !="" && strOutpoint.find(strFilter) == std::string::npos) continue;
-                objMN.push_back(Pair(strOutpoint, (int64_t)mn.lastPing.sigTime));
-                obj.push_back(objMN);
+                obj.push_back(Pair(strOutpoint, (int64_t)mn.lastPing.sigTime));
             } else if (strMode == "payee") {
-              UniValue objMN(UniValue::VOBJ);
                 CBitcoinAddress address(mn.pubKeyCollateralAddress.GetID());
                 std::string strPayee = address.ToString();
                 if (strFilter !="" && strPayee.find(strFilter) == std::string::npos &&
                     strOutpoint.find(strFilter) == std::string::npos) continue;
-                objMN.push_back(Pair(strOutpoint, strPayee));
-                obj.push_back(objMN);
+                obj.push_back(Pair(strOutpoint, strPayee));
             } else if (strMode == "protocol") {
-              UniValue objMN(UniValue::VOBJ);
                 if (strFilter !="" && strFilter != strprintf("%d", mn.nProtocolVersion) &&
                     strOutpoint.find(strFilter) == std::string::npos) continue;
-                objMN.push_back(Pair(strOutpoint, mn.nProtocolVersion));
-                obj.push_back(objMN);
+                obj.push_back(Pair(strOutpoint, (int64_t)mn.nProtocolVersion));
             } else if (strMode == "pubkey") {
-              UniValue objMN(UniValue::VOBJ);
                 if (strFilter !="" && strOutpoint.find(strFilter) == std::string::npos) continue;
-                objMN.push_back(Pair(strOutpoint, HexStr(mn.pubKeyMasternode)));
-                obj.push_back(objMN);
+                obj.push_back(Pair(strOutpoint, HexStr(mn.pubKeyMasternode)));
             } else if (strMode == "status") {
-              UniValue objMN(UniValue::VOBJ);
                 std::string strStatus = mn.GetStatus();
                 if (strFilter !="" && strStatus.find(strFilter) == std::string::npos &&
                     strOutpoint.find(strFilter) == std::string::npos) continue;
-                objMN.push_back(Pair(strOutpoint, strStatus));
-                obj.push_back(objMN);
+                obj.push_back(Pair(strOutpoint, strStatus));
             }
         }
     }
