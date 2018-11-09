@@ -352,14 +352,14 @@ public:
             output_scripts = std::vector<CScript>{std::move(p2pk), std::move(p2pkh)};
             out.pubkeys.emplace(keyid, key);
         }
-        if (key.IsCompressed()) {
+        /*if (key.IsCompressed()) {
             CScript p2wpkh = GetScriptForDestination(WitnessV0KeyHash(keyid));
             CScriptID p2wpkh_id(p2wpkh);
             CScript p2sh_p2wpkh = GetScriptForDestination(p2wpkh_id);
             out.scripts.emplace(p2wpkh_id, p2wpkh);
             output_scripts.push_back(std::move(p2wpkh));
             output_scripts.push_back(std::move(p2sh_p2wpkh));
-        }
+        }*/
         return true;
     }
 };
