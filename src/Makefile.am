@@ -160,6 +160,7 @@ BITCOIN_CORE_H = \
   rpc/server.h \
   rpc/register.h \
   scheduler.h \
+  script/descriptor.h \
   script/sigcache.h \
   script/sign.h \
   script/standard.h \
@@ -399,6 +400,7 @@ libpolis_common_a_SOURCES = \
   netbase.cpp \
   protocol.cpp \
   scheduler.cpp \
+  script/descriptor.cpp \
   script/sign.cpp \
   script/standard.cpp \
   warnings.cpp \
