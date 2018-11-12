@@ -14,7 +14,7 @@
 #include <util.h>
 #include <utilstrencodings.h>
 
-#include <memory>
+#include <util/memory.h>
 #include <string>
 #include <vector>
 
@@ -527,21 +527,21 @@ std::unique_ptr<Descriptor> ParseScript(Span<const char>& sp, ParseScriptContext
         }
         return MakeUnique<MultisigDescriptor>(thres, std::move(providers));
     }
-    if (ctx != ParseScriptContext::P2WSH && Func("wpkh", expr)) {
+    /*if (ctx != ParseScriptContext::P2WSH && Func("wpkh", expr)) {
         auto pubkey = ParsePubkey(expr, false, out);
         if (!pubkey) return nullptr;
         return MakeUnique<SingleKeyDescriptor>(std::move(pubkey), P2WPKHGetScript, "wpkh");
-    }
+    }*/
     if (ctx == ParseScriptContext::TOP && Func("sh", expr)) {
         auto desc = ParseScript(expr, ParseScriptContext::P2SH, out);
         if (!desc || expr.size()) return nullptr;
         return MakeUnique<ConvertorDescriptor>(std::move(desc), ConvertP2SH, "sh");
     }
-    if (ctx != ParseScriptContext::P2WSH && Func("wsh", expr)) {
+    /*if (ctx != ParseScriptContext::P2WSH && Func("wsh", expr)) {
         auto desc = ParseScript(expr, ParseScriptContext::P2WSH, out);
         if (!desc || expr.size()) return nullptr;
         return MakeUnique<ConvertorDescriptor>(std::move(desc), ConvertP2WSH, "wsh");
-    }
+    }*/
     if (ctx == ParseScriptContext::TOP && Func("addr", expr)) {
         CTxDestination dest = DecodeDestination(std::string(expr.begin(), expr.end()));
         if (!IsValidDestination(dest)) return nullptr;
