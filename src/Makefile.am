@@ -82,6 +82,7 @@ BITCOIN_CORE_H = \
   spentindex.h \
   addrman.h \
   alert.h \
+  amount.h\
   base58.h \
   bip39.h \
   bip39_english.h \
@@ -215,6 +216,7 @@ libpolis_server_a_SOURCES = \
   addrman.cpp \
   addrdb.cpp \
   alert.cpp \
+  amount.cpp\
   bloom.cpp \
   blockencodings.cpp \
   chain.cpp \
