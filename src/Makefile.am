@@ -156,6 +156,7 @@ BITCOIN_CORE_H = \
   protocol.h \
   random.h \
   reverselock.h \
+  rpc/blockchain.h \
   rpc/client.h \
   rpc/protocol.h \
   rpc/server.h \
@@ -183,6 +184,7 @@ BITCOIN_CORE_H = \
   ui_interface.h \
   undo.h \
   util.h \
+  util/system.h \
   util/memory.h \
   utilmoneystr.h \
   utiltime.h \
@@ -427,6 +429,7 @@ libpolis_util_a_SOURCES = \
   sync.cpp \
   threadinterrupt.cpp \
   util.cpp \
+  util/system.cpp \
   utilmoneystr.cpp \
   utilstrencodings.cpp \
   utiltime.cpp \
