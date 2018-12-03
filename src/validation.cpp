@@ -3673,8 +3673,10 @@ static bool AcceptBlock(const std::shared_ptr<const CBlock>& pblock, CValidation
     CBlockIndex *pindexDummy = NULL;
     CBlockIndex *&pindex = ppindex ? *ppindex : pindexDummy;
 
-    if (!AcceptBlockHeader(block, state, chainparams, &pindex))
+    if (!AcceptBlockHeader(block, state, chainparams, &pindex)){
+        LogPrintf("AcceptBlock:: Failed accepting Block Header");
         return false;
+    }
 
     // Try to process all requested blocks that we don't have, but only
     // process an unrequested block if it's new and has enough work to

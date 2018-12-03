@@ -119,8 +119,11 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(CWallet *wallet, 
 
     pblocktemplate.reset(new CBlockTemplate());
 
-    if(!pblocktemplate.get())
+    if(!pblocktemplate.get()){
+        LogPrintf("BlockAssembler::CreateNewBlock() Could not find pointer for pblocktemplate\n");
         return nullptr;
+    }
+
     pblock = &pblocktemplate->block; // pointer for convenience
 
     // Add dummy coinbase tx as first transaction
