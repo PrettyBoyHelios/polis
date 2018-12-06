@@ -417,7 +417,7 @@ bool CheckProofOfStake(const CBlock &block, uint256& hashProofOfStake)
     CTransactionRef txPrev;
     const auto &cons = Params().GetConsensus();
     if (!GetTransaction(txin.prevout.hash, txPrev, cons, hashBlock, true))
-        return ("CheckProofOfStake() : INFO: read txPrev failed");
+        return error("CheckProofOfStake() : INFO: read txPrev failed");
     CTxOut prevTxOut = txPrev->vout[txin.prevout.n];
     CBlockIndex* pindex = NULL;
     BlockMap::iterator it = mapBlockIndex.find(hashBlock);
