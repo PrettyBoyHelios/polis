@@ -3451,6 +3451,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
       //   }
 
         if(!CheckProofOfStake(block, hashProofOfStake)) {
+            LogPrintf("Check Proof of Stake Failed at");
             return state.DoS(100, error("CheckBlock(): check proof-of-stake failed for block %s\n", hash.ToString().c_str()));
         }
 
