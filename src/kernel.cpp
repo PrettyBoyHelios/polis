@@ -348,7 +348,7 @@ bool CheckStakeKernelHash(unsigned int nBits, const CBlock& blockFrom, unsigned 
 
 
     //if (!GetKernelStakeModifier(blockFrom.GetHash(), nTimeTx, nStakeModifier, nStakeModifierHeight, nStakeModifierTime, fPrintProofOfStake))
-    //    return error("Failed to get kernel stake modifier");
+        //return error("Failed to get kernel stake modifier");
 
     ss << nStakeModifier;
     ss << nTimeBlockFrom << nTxPrevOffset << txPrevTime << prevout.n << nTimeTx;
@@ -370,7 +370,8 @@ bool CheckStakeKernelHash(unsigned int nBits, const CBlock& blockFrom, unsigned 
     }
     // Now check if proof-of-stake hash meets target protocol
     if (UintToArith256(hashProofOfStake) > bnCoinDayWeight * bnTargetPerCoinDay){
-        LogPrintf("CheckStakeKernelHash():: hash does not meet the target protocol");
+        LogPrintf("CheckStakeKernelHash():: hash does not meet the target value\n");
+        LogPrintf("CheckStakeKernelHash():: calculated hash %s, bnCoin %s, bnTarget %s\n", bnCoinDayWeight.ToString().c_str(), bnTargetPerCoinDay.ToString().c_str(), UintToArith256(hashProofOfStake).ToString().c_str());
         return false;
     }
 
