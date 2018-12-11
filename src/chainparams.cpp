@@ -164,6 +164,8 @@ public:
             // POS hard fork date
             consensus.nLastPoWBlock = 209720;
 
+            //
+
             consensus.nRuleChangeActivationThreshold = 1916; // 95% of 2016
             consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
             consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
@@ -241,7 +243,7 @@ public:
             fAllowMultiplePorts = false;
 
             nPoolMaxTransactions = 3;
-            nFulfilledRequestExpireTime = 60*60; // fulfilled requests expire in 1 hour
+            nFulfilledRequestExpireTime = 60 * 60; // fulfilled requests expire in 1 hour
 
             strSporkAddress = "PAvya6xSBRb755Uhe2aXBFsjuyi68hTP8u";
 
