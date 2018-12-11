@@ -163,7 +163,7 @@ public:
 
             // POS hard fork date
             consensus.nLastPoWBlock = 209720;
-
+            consensus.v03Deployment = 241500;
             //
 
             consensus.nRuleChangeActivationThreshold = 1916; // 95% of 2016

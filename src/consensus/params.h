@@ -96,7 +96,7 @@ struct Params {
     int64_t nPosTargetTimespan;
 
     int nLastPoWBlock;
-    //int v03Deployment;
+    int v03Deployment;
 
     unsigned int nWSTargetDiff;
     int nPoSDiffAdjustRange;
