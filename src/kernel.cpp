@@ -318,8 +318,9 @@ static bool GetKernelStakeModifierV05(unsigned int nTimeTx, uint64_t& nStakeModi
 // Get the stake modifier specified by the protocol to hash for a stake kernel
 static bool GetKernelStakeModifier(uint256 hashBlockFrom, unsigned int nTimeTx, uint64_t& nStakeModifier, int& nStakeModifierHeight, int64_t& nStakeModifierTime, bool fPrintProofOfStake)
 {
-    return GetKernelStakeModifierV03(hashBlockFrom, nTimeTx, nStakeModifier, nStakeModifierHeight, nStakeModifierTime, fPrintProofOfStake);
-    //return GetKernelStakeModifierV05(nTimeTx, nStakeModifier, nStakeModifierHeight, nStakeModifierTime, fPrintProofOfStake);
+    //return GetKernelStakeModifierV03(hashBlockFrom, nTimeTx, nStakeModifier, nStakeModifierHeight, nStakeModifierTime, fPrintProofOfStake);
+    return GetKernelStakeModifierV05(nTimeTx, nStakeModifier, nStakeModifierHeight, nStakeModifierTime, fPrintProofOfStake);
+    // if(nTimeTx > Params().consensus.v03Deployment)
 }
 uint256 stakeHash(unsigned int nTimeTx, CDataStream ss, unsigned int prevoutIndex, uint256 prevoutHash, unsigned int nTimeBlockFrom)
 {
@@ -339,6 +340,7 @@ bool stakeTargetHit(uint256 hashProofOfStake, int64_t nValueIn, arith_uint256 bn
     // Now check if proof-of-stake hash meets target protocol
     return UintToArith256(hashProofOfStake) < bnCoinDayWeight * bnTargetPerCoinDay;
 }
+
 // ppcoin kernel protocol
 // coinstake must meet hash target according to the protocol:
 // kernel (input 0) must meet the formula
@@ -365,6 +367,7 @@ bool stakeTargetHit(uint256 hashProofOfStake, int64_t nValueIn, arith_uint256 bn
 //   quantities so as to generate blocks faster, degrading the system back into
 //   a proof-of-work situation.
 //
+
 bool CheckStakeKernelHash(unsigned int nBits, const CBlock& blockFrom, unsigned int nTxPrevOffset, std::shared_ptr<const CTransaction> txPrev, const COutPoint& prevout, unsigned int nTimeTx, uint256& hashProofOfStake, bool fPrintProofOfStake)
 {
     auto txPrevTime = blockFrom.GetBlockTime();
