@@ -220,7 +220,7 @@ bool CWallet::CreateCoinStakeKernel(CScript &kernelScript, const CScript &stakeS
 
     auto nStakeMinAge = CurrentMinStakeAge(blockFrom.GetBlockTime());
 
-  bool isProofOfStakeV3 = Params().GetConsensus().nPoSUpdgradeHFHeight < pindex->nHeight;
+    bool isProofOfStakeV3 = Params().GetConsensus().nPoSUpdgradeHFHeight < pindex->nHeight;
 
     auto blockFromHash = blockFrom.GetHash();
     auto blockFromTime = blockFrom.GetBlockTime();

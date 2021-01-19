@@ -391,6 +391,7 @@ public:
                         ( 324353, uint256S("0x852675a3957d48e0f1198fdda33e496211317d89bab71ff39c28faaf3d4e61af"))
                         ( 336284, uint256S("0xd3dbdedff4c5b1f6e47ab43d2b0dc1f9a5a011035b4b936284a5b8725d405a78"))
                         ( 379624, uint256S("0x58b38dde8562a110d53bae6cc5326678615a9f461095bcc189b6de6d0f7e65cc"))
+                        ( 453010, uint256S("0xb2442d9937b25098e443edb3ea5df4adaf6358c620c005322151cdab0acd3410"))
                         ( 453700, uint256S("0xaebf0dde0fde68ffba89b515f3e7d8f64e15ccf309f8fe60302e4df482c34555"))
                         ( 750669, uint256S("0x8db94d662b88ef32cab70c2b2e117c885defbd30da68fcde5fa64f6aaa89c292"))
             };
