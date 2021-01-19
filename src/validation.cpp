@@ -2438,7 +2438,7 @@ static bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockInd
     bool isPoSV3 = Params().GetConsensus().nPoSUpdgradeHFHeight < pindex->nHeight;
 
     CAmount reward = nValueOut - nValueIn;
-    if (reward > 1152000000) {
+    if (reward > 1152000000 && isPoSV3) {
         return state.DoS(10, error("ConnectBlock(POLIS): block reward is too much"),
                                      REJECT_INVALID, "bad-cb-amount");
     }
