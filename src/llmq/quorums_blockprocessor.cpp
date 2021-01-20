@@ -139,6 +139,8 @@ bool CQuorumBlockProcessor::ProcessBlock(const CBlock& block, const CBlockIndex*
 
         // does the currently processed block contain a (possibly null) commitment for the current session?
         bool hasCommitmentInNewBlock = qcs.count(type) != 0;
+        LogPrintf("ProcessBlock::qcs count %d\n", qcs.count(type));
+
         bool isCommitmentRequired = IsCommitmentRequired(type, pindex->nHeight);
 
         if (hasCommitmentInNewBlock && !isCommitmentRequired) {
@@ -146,12 +148,24 @@ bool CQuorumBlockProcessor::ProcessBlock(const CBlock& block, const CBlockIndex*
             return state.DoS(100, false, REJECT_INVALID, "bad-qc-not-allowed");
         }
 
-        if (!hasCommitmentInNewBlock && isCommitmentRequired && InUseProtocol() >= 70220) {
-            // If no non-null commitment was mined for the mining phase yet and the new block does not include
-            // a (possibly null) commitment, the block should be rejected.
-            return state.DoS(100, false, REJECT_INVALID, "bad-qc-missing");
-        }
+        LogPrintf("ProcessBlock::pindexHeight %d, hasCommitmentInNewBlock %d :: isCommitmentRequired %d\n", pindex->nHeight, hasCommitmentInNewBlock, isCommitmentRequired);
+        //LogPrintf("CQuorumBlockProcessor::%s -- null commitment from peer=%d\n", __func__, pfrom->id);
+
+
+        /*if (!hasCommitmentInNewBlock && isCommitmentRequired && InUseProtocol() >= 70220) {
+            if (pindex->nHeight != 453010) {
+                // If no non-null commitment was mined for the mining phase yet and the new block does not include
+                // a (possibly null) commitment, the block should be rejected.
+                LogPrintf("ProcessBlock::Commitment Check at Block %d\n", pindex->nHeight);
+
+                return state.DoS(100, false, REJECT_INVALID, "bad-qc-missing");
+            }
+            
+        }*/
     }
+
+    LogPrintf("ProcessBlock::GOT HERE!!");
+
 
     auto blockHash = block.GetHash();
 

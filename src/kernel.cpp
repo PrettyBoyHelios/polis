@@ -451,6 +451,7 @@ bool CheckProofOfStake(const CBlockIndex *pindexPrev, const CBlock &block, uint2
         return error("CheckProofOfStake() : INFO: check kernel script failed on coinstake %s, hashProof=%s \n", tx->GetHash().ToString().c_str(), hashProofOfStake.ToString().c_str());
    
     bool isProofOfStakeV3 = params.nPoSUpdgradeHFHeight < pindexPrev->nHeight;
+    LogPrintf("CheckProofOfStake() : INFO: isProofOfStakeV3 %d (%d of %d)", isProofOfStakeV3, pindexPrev->nHeight, params.nPoSUpdgradeHFHeight);
     unsigned int nTime = block.nTime;
     if (!CheckStakeKernelHash(pindexPrev, block.nBits, sizeof(CBlock), blockprev.GetHash(), blockprev.GetBlockTime(), txPrev, txin.prevout, nTime, hashProofOfStake, isProofOfStakeV3))
         return error("CheckProofOfStake() : INFO: check kernel failed on coinstake %s, hashProof=%s \n", tx->GetHash().ToString().c_str(), hashProofOfStake.ToString().c_str()); // may occur during initial download or if behind on block chain sync
