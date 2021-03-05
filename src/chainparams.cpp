@@ -240,7 +240,7 @@ public:
             consensus.nStakeMaxAge = 60 * 60 * 24; // one day
             consensus.nWSTargetDiff = 0x1e0ffff0; // Genesis Difficulty
             consensus.nPoSDiffAdjustRange = 5;
-            consensus.nPoSUpdgradeHFHeight = 770680;
+            consensus.nPoSUpdgradeHFHeight = 774911;
 
             // POS hard fork date
             consensus.nLastPoWBlock = 209720;
@@ -251,6 +251,9 @@ public:
             // hard coded payment Blocks
             consensus.nHardCodedPayment = 686805;
             consensus.nHardCodedPaymentAddress = "PGxr2egr3K7YUVpeR33d5EDG1Qi1LGiJx2";
+            // Second Hard Coded Payment accounting for missing governance payments on December 2020, January 2021 and February 2021. Totalling 63k.
+            consensus.nSecondHardCodedPayment = 774911;
+            consensus.nSecondHardCodedPaymentAddress = "PJCf5gfJomMaUW2NfmUsspKQoV6HJkHPGN";
 
             consensus.nRuleChangeActivationThreshold = 1916; // 95% of 2016
             consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
@@ -315,15 +318,14 @@ public:
             assert(genesis.hashMerkleRoot == uint256S("0x5dc9bcf5d1e4802dad0045a88849e3ad97d07a5b8aaee1114ed5ae03b98c4bfc"));
 
             vSeeds.push_back(CDNSSeedData("167.172.143.204","167.172.143.204"));
-            vSeeds.push_back(CDNSSeedData("165.22.82.200", "165.22.82.200"));
-            vSeeds.push_back(CDNSSeedData("46.101.145.29", "46.101.145.29"));
+            vSeeds.push_back(CDNSSeedData("167.172.45.36", "167.172.45.36"));
+            vSeeds.push_back(CDNSSeedData("167.71.3.168", "167.71.3.168"));
             vSeeds.push_back(CDNSSeedData("178.128.7.220", "178.128.7.220"));
-            vSeeds.push_back(CDNSSeedData("165.227.140.247", "165.227.140.247"));
-            vSeeds.push_back(CDNSSeedData("45.32.184.252", "45.32.184.252"));
+            vSeeds.push_back(CDNSSeedData("178.128.16.154", "178.128.16.154"));
+            vSeeds.push_back(CDNSSeedData("68.183.201.109", "68.183.201.109"));
+            vSeeds.push_back(CDNSSeedData("143.110.145.33", "143.110.145.33"));
             vSeeds.push_back(CDNSSeedData("95.111.237.31", "95.111.237.31"));
             vSeeds.push_back(CDNSSeedData("161.97.112.31", "161.97.112.31"));
-            vSeeds.push_back(CDNSSeedData("167.71.3.168", "167.71.3.168"));
-            vSeeds.push_back(CDNSSeedData("64.227.44.5", "64.227.44.5"));
 
             // polis addresses start with 'P'
             base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,55);
@@ -396,10 +398,11 @@ public:
                         ( 379624, uint256S("0x58b38dde8562a110d53bae6cc5326678615a9f461095bcc189b6de6d0f7e65cc"))
                         ( 453700, uint256S("0xaebf0dde0fde68ffba89b515f3e7d8f64e15ccf309f8fe60302e4df482c34555"))
                         ( 750669, uint256S("0x8db94d662b88ef32cab70c2b2e117c885defbd30da68fcde5fa64f6aaa89c292"))
+                        ( 775079, uint256S("0x52c0f4ca7a6ec49f90ca1ddb8bffe6b64456e803068f7aab4ba3233ae881853e"))
             };
         chainTxData = ChainTxData{
-                1608655984, // * UNIX timestamp of last checkpoint block
-                2388905,    // * total number of transactions between genesis and last checkpoint
+                1611709708, // * UNIX timestamp of last checkpoint block
+                2456131,    // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
                 0.1        // * estimated number of transactions per day after checkpoint
 
@@ -466,6 +469,9 @@ public:
             // hard coded payment Block
             consensus.nHardCodedPayment = 9999999999;
             consensus.nHardCodedPaymentAddress = "PGxr2egr3K7YUVpeR33d5EDG1Qi1LGiJx2";
+            // Second Hard Coded Payment accounting for missing governance payments on December 2020, January 2021 and February 2021. Totalling 63k.
+            consensus.nSecondHardCodedPayment = 9999999999;
+            consensus.nSecondHardCodedPaymentAddress = "PJCf5gfJomMaUW2NfmUsspKQoV6HJkHPGN";
 
             // Deployment of BIP68, BIP112, and BIP113.
             consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
@@ -632,6 +638,8 @@ public:
             // hard coded payment Block
             consensus.nHardCodedPayment = 9999999999;
             consensus.nHardCodedPaymentAddress = "PGxr2egr3K7YUVpeR33d5EDG1Qi1LGiJx2";
+            consensus.nSecondHardCodedPayment = 9999999999;
+            consensus.nSecondHardCodedPaymentAddress = "PJCf5gfJomMaUW2NfmUsspKQoV6HJkHPGN";
 
             consensus.nRuleChangeActivationThreshold = 1512; // 75% for testchains
             consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
@@ -829,6 +837,8 @@ public:
             // hard coded payment Block
             consensus.nHardCodedPayment = 9999999999;
             consensus.nHardCodedPaymentAddress = "PGxr2egr3K7YUVpeR33d5EDG1Qi1LGiJx2";
+            consensus.nSecondHardCodedPayment = 9999999999;
+            consensus.nSecondHardCodedPaymentAddress = "PJCf5gfJomMaUW2NfmUsspKQoV6HJkHPGN";
 
             // The best chain should have at least this much work.
             consensus.nMinimumChainWork = uint256S("0x00");

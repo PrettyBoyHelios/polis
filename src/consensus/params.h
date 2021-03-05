@@ -190,6 +190,8 @@ struct Params {
     int nLastBlock;
     int nHardCodedPayment;
     std::string nHardCodedPaymentAddress;
+    int nSecondHardCodedPayment;
+    std::string nSecondHardCodedPaymentAddress;
     unsigned int nWSTargetDiff;
     int nPoSDiffAdjustRange;
     int nMaxBlockSpacingFixDeploymentHeight;

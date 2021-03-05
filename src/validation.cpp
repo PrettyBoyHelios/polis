@@ -2439,7 +2439,7 @@ static bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockInd
 
     CAmount reward = nValueOut - nValueIn;
 
-    if (reward > expectedReward && pindex->nHeight > 770000) {
+    if (reward > expectedReward && pindex->nHeight > 770000 && pindex->nHeight != Params().GetConsensus().nSecondHardCodedPayment) {
         return state.DoS(10, error("ConnectBlock(POLIS): block reward is too much expected %d contains %d", expectedReward, reward),
                                         REJECT_INVALID, "bad-cb-amount");
     }
@@ -5003,10 +5003,7 @@ bool FullDIP0003Mode() {
 
 //! Returns the protocol version based on height
 int InUseProtocol() {
-    if (chainActive.Height() >= Params().GetConsensus().nPoSUpdgradeHFHeight){
-        return 70222;
-    }
-  return 70221;
+    return 70222;
 }
 
 class CMainCleanup
